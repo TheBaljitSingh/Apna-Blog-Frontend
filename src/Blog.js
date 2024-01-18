@@ -13,8 +13,6 @@ var moment = require('moment');
 
 
 
-
-
 <BrowserRouter>
   <Routes>
     <Route path="/new-path" element={<About/>}>   
@@ -38,7 +36,7 @@ function Blog(props) {
       console.log(`printing the environment variable: ${process.env.REACT_APP_BACKEND_URL}`);
         await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/Journal`)
               .then((response)=>{
-                console.log(response.data[0]);
+                console.log(response.data);
                 setArticle(response.data);
                 article.reverse();
               })
@@ -58,13 +56,14 @@ function Blog(props) {
 
     const dispatch = useDispatch();
 
-    const setData = (t,d)=>{
+    const setData = (t,d,u)=>{
       
       store.dispatch({
         type:"checkValue",
         payload: {
           title: t,
-          description: d
+          description: d,
+          author: u
         },
       })
     }
@@ -110,7 +109,7 @@ function Blog(props) {
              
           
           <Link className='text-blue-600 hover:cursor-pointer' to={{ pathname:"/posts", search: ("?Title="+data.title).replace(/\s\+/g, '-').toLowerCase()}}> 
-          <div key={i} onClick={(e)=>{setData(data.title, data.description)}}  className="hover:cursor-pointer text-black mt-2  flex flex-row  w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
+          <div key={i} onClick={(e)=>{setData(data.title, data.description, data.author)}}  className="hover:cursor-pointer text-black mt-2  flex flex-row  w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
   
           <div  className=" h-12 "> 
           <h1  className="h-8  truncate  font-semibold text-lg">

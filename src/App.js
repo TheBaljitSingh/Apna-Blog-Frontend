@@ -24,10 +24,24 @@ export default function App(){
 
 
   // const {isAuthenticated} = useSelector(state=>state.custom);
-  const {title, description} = useSelector(state=>state.custom).data;
+  const {title, description, author} = useSelector(state=>state.custom).data;
   // const title = "hi title"
   // const description = "hi description";
+  const [user, setUser] = useState();
 
+
+
+
+  //makig api for chek user name
+
+   axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/checkName`, {author})
+  .then(res=>{
+    if(res.status==200){
+      setUser(res.data.name);
+    }
+  }).catch(e=>{
+    console.log(e);
+  })
 
   const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
@@ -46,7 +60,8 @@ export default function App(){
       .then(res=>{
         // console.log(res);
         if(res.status==200){
-          console.log("login wala true kar diya ");
+          // console.log("login wala true kar diya ");
+          // console.log(res);
           // token is valid
           // sab sahi hai
           setLogin(true);
@@ -100,7 +115,7 @@ export default function App(){
          <Route  path="/about" element={<About title="ABOUT" />} />
          <Route path="/Blog" element={<Blog title="BLOG" />} />
          <Route  path="/contact" element={<Contact title="CONTACT TO ADMIN" />} />
-         <Route path="/posts" element={<View title={title} description={description} />} />
+         <Route path="/posts" element={<View title={title} description={description} author={user} />} />
 
 
         <Route path="/Dashboard" element={ isLogin? <Dashboard  userData={userDetail?userDetail:"kuch bhi nahi hai data me"} />: <Login/>} />

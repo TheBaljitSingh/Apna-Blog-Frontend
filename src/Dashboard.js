@@ -4,8 +4,8 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { MdLockOutline,MdLockOpen } from "react-icons/md";
-  // import store from "./store";
-// import { useDispatch, useSelector } from 'react-redux';
+  import store from "./store";
+import { useDispatch, useSelector } from 'react-redux';
 import Nav from "./Nav";
 
 
@@ -110,6 +110,19 @@ export default function Dashboard(props){
           })
 
     }
+
+    const dispatch = useDispatch();
+
+    const setData = (t,d)=>{
+      
+      store.dispatch({
+        type:"checkValue",
+        payload: {
+          title: t,
+          description: d
+        },
+      })
+    }
             
     
   
@@ -198,7 +211,8 @@ export default function Dashboard(props){
 
         //ye div hai
 
-        <div key={i} className="mt-2 hover:cursor-pointer flex flex-row w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
+          <Link className="hover:cursor-default " to={{pathname:"/posts"}}>
+        <div key={i} onClick={(e)=>{setData(data.title, data.description)}} className="mt-2 hover:cursor-pointer flex flex-row w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
 
         <div  className=""> 
         <div className="inline-flex space-x-1 sm:w-auto ">
@@ -213,7 +227,6 @@ export default function Dashboard(props){
         <p className="mt-2 sm:line-clamp-2 line-clamp-2">
           {data.description}
         </p>
-        <p>{data.date}</p>
         </div>
 
           <div className="hover:cursor-default p-1 w-16 h-17 text-white text-center shrink-0 bg-purple-500">
@@ -222,6 +235,7 @@ export default function Dashboard(props){
           <p className="text-sm font-light" >{moment(`${data.date}`).format('DD-MM-YYYY').substring(6,10)}</p>
         </div>
         </div>
+        </Link>
           )} 
           </div>  
         
@@ -232,9 +246,9 @@ export default function Dashboard(props){
       
 
           
-        <footer className='w-screen bg-teal-400 h-12 fixed bottom-0 left-0 flex justify-center items-center '>
+        {/* <footer className='w-screen bg-teal-400 h-12 fixed bottom-0 left-0 flex justify-center items-center '>
           <p className='flex justify-center '>Baljit Singh</p>
-        </footer>
+        </footer> */}
 
         </div>
           

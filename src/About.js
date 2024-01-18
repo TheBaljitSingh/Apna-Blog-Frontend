@@ -29,9 +29,9 @@ export default function About(props){
           </div>
 
 
-          <footer className='w-screen bg-teal-400 h-12 fixed bottom-0 left-0 flex justify-center items-center '>
+          {/* <footer className='w-screen bg-teal-400 h-12 fixed bottom-0 left-0 flex justify-center items-center '>
           <p className='flex justify-center '>Baljit Singh</p>
-        </footer>
+        </footer> */}
         </div>
     </div>
     )

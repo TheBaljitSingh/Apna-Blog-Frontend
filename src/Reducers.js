@@ -4,7 +4,8 @@ const initialState = {
     isAuthenticated:false,
     data:{
         title: null,
-        description: null
+        description: null,
+        author:null,
     }
 }
 
@@ -18,9 +19,10 @@ const customReducer = createReducer(initialState, (builder)=>{
         state.isAuthenticated = action.payload;
     })
     .addCase("checkValue", (state,action)=>{
-        const {title, description } = action.payload;
+        const {title, description, author } = action.payload;
         state.data.title = title;
         state.data.description = description;
+        state.data.author = author;
     });
     
 });

@@ -6,14 +6,15 @@ import Nav from './Nav';
 
 function View(props) {
 
-    const {title, description } = props;
+    const {title, description, author} = props;
     console.log(title);
     console.log(description);
+    console.log(author);
 
 
   //  const navigate = useNavigate();  
 
-   if(!title && !description){
+   if(!title && !description && !author){
     return (
         <div>
             <Nav/>
@@ -46,13 +47,14 @@ function View(props) {
 
           </div>
           <div className=" p-2 ml-52 mr-48 text-left font-normal text-xl ">
+            <p >Published By - <span className='bg-sky-300 rounded-sm w-2 p-1 font-medium hover:bg-sky-200 hover:cursor-pointer'> {props.author}</span></p>
             {props.description}
           </div>
 
 
-          <footer className='w-screen bg-teal-400 h-12 fixed bottom-0 left-0 flex justify-center items-center '>
+          {/* <footer className='w-screen bg-teal-400 h-12 fixed bottom-0 left-0 flex justify-center items-center '>
           <p className='flex justify-center '>Baljit Singh</p>
-        </footer>
+        </footer> */}
         </div>
    )
 
