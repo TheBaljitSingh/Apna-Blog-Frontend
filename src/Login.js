@@ -91,13 +91,13 @@ export default function Login(){
 
                 Swal.fire({
                     title:"wow!",
-                    text:"successfully Logged In Redirecting in 4 sec.",
+                    text:"successfully Logged In Redirecting in a sec.",
                     icon:"success"
                 });
 
                 setTimeout(()=>{
                     window.location.reload();
-                },4000)
+                },1000)
              
 
 

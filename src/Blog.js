@@ -6,6 +6,8 @@ import { Routes, Route, Link, BrowserRouter } from 'react-router-dom';
 import About from './About';
 import { useDispatch } from 'react-redux';
 import store from "./store";
+var moment = require('moment');
+
 
 // require('dotenv').config();
 
@@ -24,23 +26,26 @@ import store from "./store";
 function Blog(props) {
 
     const [article, setArticle] = useState([{}]);
-    const [title, setTitle] = useState("");
-    const [ description, setDiscription] = useState("");
+    const [date, setDate] = useState();
+    // const [title, setTitle] = useState("");
+    // const [ description, setDiscription] = useState("");
     
-    console.log(title);
-    console.log(description);
+    // console.log(title);
+    // console.log(description);
 
     const fetchInfo = async ()=>{
 
       console.log(`printing the environment variable: ${process.env.REACT_APP_BACKEND_URL}`);
         await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/Journal`)
               .then((response)=>{
-                // console.log(response);
+                console.log(response.data[0]);
                 setArticle(response.data);
                 article.reverse();
               })
 
     }
+    
+
     
     // console.log(article.length);
 
@@ -75,7 +80,10 @@ function Blog(props) {
     
 
 
+
   return (
+
+    
     <div>
         <Nav/>
         <div className="font-sans overflow-auto overflow-x-hidden   absolute ">
@@ -107,6 +115,7 @@ function Blog(props) {
           <div  className=" h-12 "> 
           <h1  className="h-8  truncate  font-semibold text-lg">
             {data.title}
+            {/* data.date */}
           </h1>
           <div className='flex-row  '>
           <p className=" line-clamp-1">
@@ -123,9 +132,9 @@ function Blog(props) {
           </div>
   
            <div className="hover:cursor-default p-1 w-16 h-17 text-white text-center shrink-0 bg-purple-500">
-            <p class="text-sm">JUN</p>
-            <p class="text-3xl leading-none font-bold">18</p>
-            <p className="text-sm font-light" >2024</p>
+            <p class="text-sm">{ moment(`${data.date}`).format('dddd MMMM DD YYYY').substring(0,3).toUpperCase() }</p>
+            <p class="text-3xl leading-none font-bold">{moment(`${data.date}`).format('DD-MM-YYYY').substring(0,2)} </p>
+            <p className="text-sm font-light" >{moment(`${data.date}`).format('DD-MM-YYYY').substring(6,10)}</p>
           </div>
           </div>
           </Link>

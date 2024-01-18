@@ -70,7 +70,9 @@ function Compose(){
         setDescription("");
         setDisplay("");        
         // now making axios post request
-    await axios.post(`${process.env.REACT_APP_BACKEND_URL}api/Compose`,{title, description, display})
+        const token = document.cookie;
+
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/compose`,{token, title, description, display})
     .then(res =>{
         if(res.data.post){
             // alert("Form is saved");

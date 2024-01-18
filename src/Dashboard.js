@@ -3,12 +3,17 @@ import { useEffect, useState } from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
-// import store from "./store";
+import { MdLockOutline,MdLockOpen } from "react-icons/md";
+  // import store from "./store";
 // import { useDispatch, useSelector } from 'react-redux';
 import Nav from "./Nav";
 
 
+
+
 export default function Dashboard(props){
+
+  var moment = require('moment');
 
 
 
@@ -46,7 +51,7 @@ export default function Dashboard(props){
         });
         setTimeout(()=>{
           window.location.reload();
-      },2000)
+      },1000)
 
       
 
@@ -177,7 +182,7 @@ export default function Dashboard(props){
 
    
 
-          <div className=' ml-52 mt-20 mb-14 w-3/4 space-y-10 '>
+          <div className=' md:ml-52 mt-20 mb-14 w-3/4 space-y-10 '>
 
             <h2 className="text-xl font-medium bg-gray-600 hover:bg-gray-700 rounded-sm text-white w-28 p-2 hover:cursor-pointer" >Your Posts</h2>
             
@@ -193,39 +198,38 @@ export default function Dashboard(props){
 
         //ye div hai
 
-        <div key={i} className=" mt-2 hover:cursor-pointer flex flex-row  w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
+        <div key={i} className="mt-2 hover:cursor-pointer flex flex-row w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
 
-        <div  className=" "> 
-        <h1 className="h-8 truncate  font-semibold ">
-          {data.title}
-        </h1>
-        <p className="mt-2 line-clamp-2 ">
+        <div  className=""> 
+        <div className="inline-flex space-x-1 sm:w-auto ">
+       
+          {data.display=='private'?< MdLockOutline size={25} />:<MdLockOpen size={25} />}
+          <h1 className="h-8 sm:truncate truncate sm:line-clamp-2  font-semibold ">
+            
+            {data.title}
+          </h1>
+        </div>
+        
+        <p className="mt-2 sm:line-clamp-2 line-clamp-2">
           {data.description}
         </p>
         <p>{data.date}</p>
         </div>
 
           <div className="hover:cursor-default p-1 w-16 h-17 text-white text-center shrink-0 bg-purple-500">
-          <p class="text-sm">JAN</p>
-          <p class="text-3xl leading-none font-bold">18</p>
-          <p className="text-sm font-light" >2024</p>
+          <p class="text-sm">{ moment(`${data.date}`).format('dddd MMMM DD YYYY').substring(0,3).toUpperCase() }</p>
+          <p class="text-3xl leading-none font-bold">{moment(`${data.date}`).format('DD-MM-YYYY').substring(0,2)}</p>
+          <p className="text-sm font-light" >{moment(`${data.date}`).format('DD-MM-YYYY').substring(6,10)}</p>
         </div>
         </div>
           )} 
           </div>  
         
-         
+        
 
 
       </div>
       
-    
-
-
-
-    
-        
-          
 
           
         <footer className='w-screen bg-teal-400 h-12 fixed bottom-0 left-0 flex justify-center items-center '>

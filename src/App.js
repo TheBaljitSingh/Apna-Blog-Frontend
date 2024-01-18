@@ -85,12 +85,12 @@ export default function App(){
   console.log(screenWidth);
 
   
- return screenWidth<720?
-(<div>
-  <h1>Please Use Laptop Screen Resolution</h1>
-</div>)
-    :
-    (
+//  return screenWidth<720?
+// (<div>
+//   <h1>Please Use Laptop Screen Resolution</h1>
+// </div>)
+//     :
+    return(
     
     <BrowserRouter>
        <Routes>
