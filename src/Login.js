@@ -151,6 +151,7 @@ export default function Login(){
                 if(res.status==201){
                     console.log("Register hua");
                     handleview();
+                    
                     Swal.fire({
                         title:"wow!",
                         text:"successfully Registered",
