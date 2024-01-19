@@ -110,7 +110,7 @@ export default function App(){
     <BrowserRouter>
        <Routes>
 
-         <Route path="/" element={<Home/>} />
+         <Route path="/" element={ isLogin? <Dashboard  userData={userDetail?userDetail:"kuch bhi nahi hai data me"} />:<Home/>} />
          <Route path="*" element={<div>404</div>} />
          <Route  path="/about" element={<About title="ABOUT" />} />
          <Route path="/Blog" element={<Blog title="BLOG" />} />
