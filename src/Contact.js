@@ -11,7 +11,7 @@ export default function Contact(props){
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault();
 
     setName("");
@@ -19,7 +19,7 @@ export default function Contact(props){
     setMessage("");
 
 
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}api/send-mail`,{name, email, message})
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}api/send-mail`,{name, email, message})
     .then(res=>{
       if(res.data.code===200){
         Swal.fire({
