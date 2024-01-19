@@ -13,6 +13,10 @@ import Nav from "./Nav";
 
 export default function Dashboard(props){
 
+  const [date, setDate] = useState();
+
+
+
   var moment = require('moment');
 
 
@@ -113,15 +117,51 @@ export default function Dashboard(props){
 
     const dispatch = useDispatch();
 
-    const setData = (t,d)=>{
+    const setData = (t,d,u)=>{
       
       store.dispatch({
         type:"checkValue",
         payload: {
           title: t,
-          description: d
+          description: d,
+          author: u
         },
       })
+    }
+
+    const [userDetail, setUserDetail] = useState();
+
+
+    async function isLoginFun(){
+      console.log("function call ho raha hai");
+  
+      const token = document.cookie;
+      console.log("ye token hai " +token);
+      
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/isLogin`, {token})
+        .then(res=>{
+          // console.log(res);
+          if(res.status==200){
+            // console.log("login wala true kar diya ");
+            // console.log(res);
+            // token is valid
+            // sab sahi hai
+            // setLogin(true);
+            setUserDetail(res.data.authUser);
+  
+          }
+          else if (res.status==202){
+            //token diya hi nahi to login nahi hua hai || token is not valid
+            // setLogin(false);
+          }
+  
+        })
+        .catch(e=>{
+          console.log(e);
+        })
+  
+        //verify the token
+        //is valid, is Expired or not
     }
             
     
@@ -129,6 +169,7 @@ export default function Dashboard(props){
     useEffect(()=>{
       fetctInfo();
       handleClick();
+      isLoginFun();
       
     },[])
 
@@ -212,7 +253,7 @@ export default function Dashboard(props){
         //ye div hai
 
           <Link className="hover:cursor-default " to={{pathname:"/posts"}}>
-        <div key={i} onClick={(e)=>{setData(data.title, data.description)}} className="mt-2 hover:cursor-pointer flex flex-row w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
+        <div key={i} onClick={(e)=>{setData(data.title, data.description, data.author )}} className="mt-2 hover:cursor-pointer flex flex-row w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
 
         <div  className=""> 
         <div className="inline-flex space-x-1 sm:w-auto ">
