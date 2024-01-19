@@ -188,7 +188,7 @@ function Compose(){
                     
                     <div className="flex flex-row space-x-5 mt-2">
                     <div class="flex items-center ">
-                        <input  id="default-radio-1"  onClick={(e)=>setDisplay("public")} type="radio" value={display} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"/>
+                        <input checked  id="default-radio-1"  onClick={(e)=>setDisplay("public")} type="radio" value={display} name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300"/>
                         <label for="default-radio-1"  class="ms-2 text-sm font-medium text-gray-900 ">Public</label>
                     </div>
                     <div class="flex items-center">
