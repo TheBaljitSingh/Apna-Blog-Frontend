@@ -13,6 +13,10 @@ export default function Contact(props){
 
   const handleSubmit = (e)=>{
     e.preventDefault();
+    name="";
+    email="";
+    message="";
+
 
     axios.post(`${process.env.REACT_APP_BACKEND_URL}api/send-mail`,{name, email, message})
     .then(res=>{
