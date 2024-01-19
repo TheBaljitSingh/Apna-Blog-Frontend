@@ -19,7 +19,7 @@ function Compose(){
   const [ email, setEmail] = useState("");
   const [role, userRole] = useState("");
   
-  const [display, setDisplay] = useState("")
+  const [display, setDisplay] = useState("public")
   const [isDropdown, setisDropdown] = useState(false);
   const dispatch = useDispatch();
   const {isLogin} = useSelector(state=>state.custom);
@@ -165,7 +165,7 @@ function Compose(){
 
                   </li>
                   <li className="mt-1 bg-gray-200 hover:bg-gray-100 ">
-                    <Link to="/Dashboard/compose" > <a href="" class="block px-4 py-2 ">Compose</a></Link>
+                    <Link to="/compose" > <a href="" class="block px-4 py-2 ">Compose</a></Link>
                   </li>
                   
                 </ul>

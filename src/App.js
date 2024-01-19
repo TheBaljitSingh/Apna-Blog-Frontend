@@ -97,7 +97,6 @@ export default function App(){
 
 
   const screenWidth = window.innerWidth;
-  console.log(screenWidth);
 
   
  return screenWidth<720?

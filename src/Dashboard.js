@@ -4,9 +4,11 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { MdLockOutline,MdLockOpen } from "react-icons/md";
-  import store from "./store";
+import store from "./store";
 import { useDispatch, useSelector } from 'react-redux';
 import Nav from "./Nav";
+import { MdDelete } from "react-icons/md";
+
 
 
 
@@ -142,17 +144,12 @@ export default function Dashboard(props){
         .then(res=>{
           // console.log(res);
           if(res.status==200){
-            // console.log("login wala true kar diya ");
-            // console.log(res);
-            // token is valid
-            // sab sahi hai
-            // setLogin(true);
+            
             setUserDetail(res.data.authUser);
   
           }
           else if (res.status==202){
-            //token diya hi nahi to login nahi hua hai || token is not valid
-            // setLogin(false);
+          
           }
   
         })
@@ -160,8 +157,25 @@ export default function Dashboard(props){
           console.log(e);
         })
   
-        //verify the token
-        //is valid, is Expired or not
+    }
+
+    async function handleDeletePost(id){
+      console.log("delete wala function call ho raha hai"+id);
+
+
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}auth/deletePost`, {id})
+      .then(res=>{
+        if(res.status==200){
+          // console.log(res);
+          // console.log("delete ho gya");
+
+          // window.location.reload();
+        }
+      })
+      .catch(e=>{
+        console.log(e);
+      })
+
     }
             
     
@@ -238,8 +252,12 @@ export default function Dashboard(props){
 
           <div className=' md:ml-52 mt-20 mb-14 w-3/4 space-y-10 '>
 
-            <h2 className="text-xl font-medium bg-gray-600 hover:bg-gray-700 rounded-sm text-white w-28 p-2 hover:cursor-pointer" >Your Posts</h2>
-            
+            <div className="flex flex-row w-7/3 justify-between items-start">
+              <div><h2 className=" text-xl font-medium bg-gray-600 hover:bg-gray-700 rounded-sm text-white w-28 p-2 hover:cursor-pointer" >Your Posts</h2></div>
+              <div> <Link to="/compose" ><h2 className="justify-end mr-24 bg-sky-400 hover:bg-sky-300 font-medium text-xl rounded-sm text-white w-28 p-2 hover:cursor-pointer "> Compose </h2></Link> </div> 
+            </div>
+
+          
 
           {/* main content starts here */}
 
@@ -252,31 +270,38 @@ export default function Dashboard(props){
 
         //ye div hai
 
-          <Link className="hover:cursor-default " to={{pathname:"/posts"}}>
-        <div key={i} onClick={(e)=>{setData(data.title, data.description, data.author )}} className="mt-2 hover:cursor-pointer flex flex-row w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
+        <div key={i} onClick={(e)=>{setData(data.title, data.description, data.author )}} className="mt-2  flex flex-row w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
 
+        
         <div  className=""> 
+
+
         <div className="inline-flex space-x-1 sm:w-auto ">
+        <Link className="hover:cursor-default " to={{pathname:"/posts"}}>
+
        
           {data.display=='private'?< MdLockOutline size={25} />:<MdLockOpen size={25} />}
-          <h1 className="h-8 sm:truncate truncate sm:line-clamp-2  font-semibold ">
+          <h1 className="hover:cursor-pointer h-8 sm:truncate truncate sm:line-clamp-2  font-semibold ">
             
             {data.title}
           </h1>
+          </Link>
         </div>
         
         <p className="mt-2 sm:line-clamp-2 line-clamp-2">
           {data.description}
         </p>
+        
+        <MdDelete  onClick={()=>handleDeletePost(data._id)} className="z-30 opacity-30 hover:opacity-100" size={18} />
+
         </div>
 
           <div className="hover:cursor-default p-1 w-16 h-17 text-white text-center shrink-0 bg-purple-500">
           <p class="text-sm">{ moment(`${data.date}`).format('dddd MMMM DD YYYY').substring(0,3).toUpperCase() }</p>
           <p class="text-3xl leading-none font-bold">{moment(`${data.date}`).format('DD-MM-YYYY').substring(0,2)}</p>
           <p className="text-sm font-light" >{moment(`${data.date}`).format('DD-MM-YYYY').substring(6,10)}</p>
+          </div>
         </div>
-        </div>
-        </Link>
           )} 
           </div>  
         

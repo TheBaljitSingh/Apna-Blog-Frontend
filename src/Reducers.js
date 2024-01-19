@@ -5,7 +5,7 @@ const initialState = {
     data:{
         title: null,
         description: null,
-        author:null,
+        author:null
     }
 }
 
