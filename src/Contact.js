@@ -27,6 +27,10 @@ export default function Contact(props){
           text: "Your messege is sent",
           icon: "success"
         });
+
+        setTimeout(()=>{
+          window.location.reload();
+        },1000)
       }
       
     })
