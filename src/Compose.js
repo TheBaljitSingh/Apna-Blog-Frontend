@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Swal from 'sweetalert2';
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Nav from "./Nav";
 import { useDispatch, useSelector } from 'react-redux';
 import store from "./store";
+
 
 
 
@@ -42,11 +44,9 @@ function Compose(){
         document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
 
-        Swal.fire({
-          title:"ok!",
-          text:"successfully Sign Out",
-          icon:"success"
-      });
+        toast.success("successfully Logout",{
+          position: "bottom-center"
+      }); 
       setTimeout(()=>{
         window.location.reload();
     },2000)
@@ -76,11 +76,9 @@ function Compose(){
     .then(res =>{
         if(res.data.post){
             // alert("Form is saved");
-            Swal.fire({
-                title: "Good job!",
-                text: "Your Journal is saved",
-                icon: "success"
-              });
+            toast.success("Your Journal is Composed! 🎉",{
+              position: "bottom-center"
+          }); 
         }
         
     })
@@ -182,7 +180,7 @@ function Compose(){
             <div className="ml-52 mt-16 w-3/4 ">
                 <form onSubmit={handleSubmit}>
                     <p>Heading</p>
-                    <input onChange={(e) =>setTitle(e.target.value)} value={title}   id="title" type="text" className="rounded-lg border border-gray-300 w-full h-10 bg-gray-50 p-2 mt-1 " placeholder="Write your Title here..." />
+                    <input onChange={(e) =>setTitle(e.target.value)} value={title} autoFocus  id="title" type="text" className="rounded-lg border border-gray-300 w-full h-10 bg-gray-50 p-2 mt-1 " placeholder="Write your Title here..." />
                     <p className="mt-2" >Descricption</p>
                     <textarea onChange={e =>setDescription(e.target.value)} value={description} id="Descricption" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Write your Descricption here..."></textarea>
                     
@@ -197,7 +195,11 @@ function Compose(){
                     </div>
                     </div>
 
-                    <button type="submit" className="rounded-lg border-2 border-gray-300 w-20 h-12 mt-2 " >Publish</button>
+                    <div className="flex-row space-x-2">
+
+                    <button type="submit" className="rounded-lg border-2  border-gray-300 w-20 h-12 mt-2 " >Publish</button>
+                    <Link to="/"><button  className="rounded-lg border-2 border-gray-300 w-26 p-2 h-12 mt-2 " >My All Posts</button></Link>
+                    </div>
                 </form>
             </div>
 
@@ -208,7 +210,7 @@ function Compose(){
             </div>
 
         
-                
+             <ToastContainer/>   
         </div>
     )
 }

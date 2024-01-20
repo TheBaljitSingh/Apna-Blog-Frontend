@@ -5,8 +5,8 @@ import axios from "axios";
 import Compose from "./Compose";
 import Contact from "./Contact";
 import Login from "./Login";
-import Loading from "./Loading";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import About from "./About";
 import Home from "./Home"
@@ -22,39 +22,43 @@ import View from "./View";
 
 export default function App(){
 
-
-  // const {isAuthenticated} = useSelector(state=>state.custom);
-  const {title, description, author} = useSelector(state=>state.custom).data;
-  // const title = "hi title"
-  // const description = "hi description";
-  const [user, setUser] = useState();
+  // toast.configure();
 
 
 
+  const {title, description, authorId} = useSelector(state=>state.custom).data;
 
-  //makig api for chek user name
+  // console.log("authorId redux wala "+ authorId);
+  const [authorName, setauthorName] = useState();
 
-   axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/checkName`, {author})
-  .then(res=>{
-    if(res.status==200){
-      setUser(res.data.name);
-    }
-  }).catch(e=>{
-    console.log(e);
-  })
 
-  const [isLoading, setLoading] = useState(true);
+  //makig api req for chek user name
+
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/checkName`, {authorId})
+    .then(res=>{
+      if(res.status==200){
+        setauthorName(res.data.name);
+        // console.log("ye response aa raha hai"+res.data.name)
+
+      }
+    }).catch(e=>{
+      console.log(e + "error in authorFunction");
+    })
+    
+
+
+  // const [isLoading, setLoading] = useState(true);
   const [isLogin, setLogin] = useState(false);
-  const [userDetail, setUserDetail] = useState();
+  const [loginUserDetail, setloginUserDetail] = useState();
 
-  console.log(isLogin);
+  // console.log(isLogin);
 
   // isLoginFun();
   async function isLoginFun(){
-    console.log("function call ho raha hai");
+    // console.log("function call ho raha hai");
 
     const token = document.cookie;
-    console.log("ye token hai " +token);
+    // console.log("ye token hai " +token);
     
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/isLogin`, {token})
       .then(res=>{
@@ -65,7 +69,7 @@ export default function App(){
           // token is valid
           // sab sahi hai
           setLogin(true);
-          setUserDetail(res.data.authUser);
+          setloginUserDetail(res.data.authUser);
 
         }
         else if (res.status==202){
@@ -88,12 +92,14 @@ export default function App(){
 
   useEffect(()=>{
     isLoginFun();
+    // authorFunction()
     // setLogin();
 
 
   },[])
 
-  console.log(isLogin);
+  // console.log("yeahi to author hai is post ka "+authorName);
+  
 
 
   const screenWidth = window.innerWidth;
@@ -109,15 +115,15 @@ export default function App(){
     <BrowserRouter>
        <Routes>
 
-         <Route path="/" element={ isLogin? <Dashboard  userData={userDetail?userDetail:"kuch bhi nahi hai data me"} />:<Home/>} />
+         <Route path="/" element={ isLogin? <Dashboard  userData={loginUserDetail?loginUserDetail:"kuch bhi nahi hai data me"} />:<Home/>} />
          <Route path="*" element={<div>404</div>} />
          <Route  path="/about" element={<About title="ABOUT" />} />
          <Route path="/Blog" element={<Blog title="BLOG" />} />
          <Route  path="/contact" element={<Contact title="CONTACT TO ADMIN" />} />
-         <Route path="/posts" element={<View title={title} description={description} author={user} />} />
+         <Route path="/posts" element={<View title={title} description={description} author={authorName} />} />
 
 
-        <Route path="/Dashboard" element={ isLogin? <Dashboard  userData={userDetail?userDetail:"kuch bhi nahi hai data me"} />: <Login/>} />
+        <Route path="/Dashboard" element={ isLogin? <Dashboard  userData={loginUserDetail?loginUserDetail:"kuch bhi nahi hai data me"} />: <Login/>} />
         <Route path="/compose" element={isLogin? <Compose/>: <Login/>} />
         {/* <Route path="/Login" element={isLogin? <Dashboard/>: <Login/>} /> */}
 

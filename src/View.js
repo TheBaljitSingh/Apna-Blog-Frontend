@@ -28,13 +28,7 @@ function View(props) {
    }
 
    return (
-        // <div>
-        // <Nav/>
-        // <h1>View Component</h1>
-
-        // <h3>{props.title}</h3>
-        // <p>{props.description}</p>
-        // </div>
+      
         <div>
         <Nav/>
 

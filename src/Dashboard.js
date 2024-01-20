@@ -8,6 +8,7 @@ import store from "./store";
 import { useDispatch, useSelector } from 'react-redux';
 import Nav from "./Nav";
 import { MdDelete } from "react-icons/md";
+import { ToastContainer,toast } from "react-toastify";
 
 
 
@@ -43,18 +44,17 @@ export default function Dashboard(props){
       .then(res=>{
         console.log(res);
         if(res.status===200){
-          console.log("server se logout hua");
+          // console.log("server se logout hua");
           
           // cookies.remove('Token');
           // document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/Dashboard;";
           document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
 
-          Swal.fire({
-            title:"ok!",
-            text:"successfully Sign Out",
-            icon:"success"
+        toast.success("LogOut Successfully",{
+            position: "bottom-center" 
         });
+
         setTimeout(()=>{
           window.location.reload();
       },1000)
@@ -86,7 +86,7 @@ export default function Dashboard(props){
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}api/userJournal`, {token})
             .then(res=>{
               if(res.status===200){
-                console.log(res);
+                // console.log(res);
                 console.log("blog ka data hai to show hona chiyea");
                 isData(true);
 
@@ -107,7 +107,7 @@ export default function Dashboard(props){
                 userRole(role);
                 isData(false);
                 console.log(res.data);
-                console.log("blog ka data nahi hai to block dikhna nahi chiyea");
+                // console.log("blog ka data nahi hai to block dikhna nahi chiyea");
               }
           
           })
@@ -119,14 +119,14 @@ export default function Dashboard(props){
 
     const dispatch = useDispatch();
 
-    const setData = (t,d,u)=>{
+    const setData = (t,d,a)=>{
       
       store.dispatch({
         type:"checkValue",
         payload: {
           title: t,
           description: d,
-          author: u
+          authorId: a
         },
       })
     }
@@ -135,10 +135,8 @@ export default function Dashboard(props){
 
 
     async function isLoginFun(){
-      console.log("function call ho raha hai");
   
       const token = document.cookie;
-      console.log("ye token hai " +token);
       
         await axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/isLogin`, {token})
         .then(res=>{
@@ -163,13 +161,22 @@ export default function Dashboard(props){
       console.log("delete wala function call ho raha hai"+id);
 
 
-      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}auth/deletePost`, {id})
+       await axios.delete(`${process.env.REACT_APP_BACKEND_URL}auth/deletePost`, {
+        data:{id}
+      })
       .then(res=>{
         if(res.status==200){
-          // console.log(res);
+          console.log("delete res"+res.data.deletedPost);
           // console.log("delete ho gya");
 
-          // window.location.reload();
+          toast.success("Deleted",{
+            position: "bottom-center"
+          })
+
+        setTimeout(()=>{
+          window.location.reload();
+
+        },1000)
         }
       })
       .catch(e=>{
@@ -275,24 +282,25 @@ export default function Dashboard(props){
         
         <div  className=""> 
 
+        <Link className="hover:cursor-default " to={{pathname:"/posts"}}>
 
         <div className="inline-flex space-x-1 sm:w-auto ">
-        <Link className="hover:cursor-default " to={{pathname:"/posts"}}>
 
        
           {data.display=='private'?< MdLockOutline size={25} />:<MdLockOpen size={25} />}
-          <h1 className="hover:cursor-pointer h-8 sm:truncate truncate sm:line-clamp-2  font-semibold ">
+          <h1 className="hover:cursor-pointer  hover:text-blue-500 h-8 sm:truncate truncate sm:line-clamp-2  font-semibold ">
             
             {data.title}
           </h1>
-          </Link>
+          
         </div>
         
-        <p className="mt-2 sm:line-clamp-2 line-clamp-2">
+        <p className="hover:cursor-pointer mt-2 sm:line-clamp-2 line-clamp-2">
           {data.description}
         </p>
+        </Link>
         
-        <MdDelete  onClick={()=>handleDeletePost(data._id)} className="z-30 opacity-30 hover:opacity-100" size={18} />
+        <MdDelete  onClick={()=>handleDeletePost(data._id)} className="hover:cursor-pointer  z-30 opacity-30 hover:opacity-100" size={18} />
 
         </div>
 
@@ -318,7 +326,7 @@ export default function Dashboard(props){
 
         </div>
           
-
+        <ToastContainer/>
       </div>
  
     )

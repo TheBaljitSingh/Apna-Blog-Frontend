@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import { redirect } from "react-router-dom";
 // import { useDispatch, useSelector } from 'react-redux';
 // import store from "./store";
@@ -11,6 +12,8 @@ import Nav from "./Nav";
 
 
 export default function Login(){
+
+ 
     
 
 
@@ -89,15 +92,13 @@ export default function Login(){
 
 
 
-                Swal.fire({
-                    title:"wow!",
-                    text:"successfully Logged In Redirecting in a sec.",
-                    icon:"success"
-                });
+               toast.success("wow logged in successfully",{
+                position: "bottom-center"
+               });
 
                 setTimeout(()=>{
                     window.location.reload();
-                },1000)
+                },2000)
              
 
 
@@ -111,14 +112,10 @@ export default function Login(){
 
             }else{
                 console.error("Login failed", res.data);
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Something went wrong!",
-                    footer: '<a href="#">Why do I have this issue?</a>'
-                  });
-                window.alert("Invalid Credentials");
-            }
+                
+                toast.error("Invalid Credentials",{
+                    position: "bottom-center"
+                });            }
         })
         .catch((error)=>{
             console.log(error.message);
@@ -134,7 +131,9 @@ export default function Login(){
         e.preventDefault()
 
         if(cpassword!=password){
-            alert("Password don't match");
+            toast.error("Password don't matched",{
+                position: "bottom-center"
+            }); 
         }
        
         else{
@@ -151,12 +150,9 @@ export default function Login(){
                 if(res.status==201){
                     console.log("Register hua");
                     handleview();
-                    
-                    Swal.fire({
-                        title:"wow!",
-                        text:"successfully Registered",
-                        icon:"success"
-                    });
+                    toast.success("successfully registered",{
+                        position: "bottom-center"
+                    });                    
 
                     
 
@@ -164,12 +160,7 @@ export default function Login(){
             })
             .catch((error)=>{
                 console.log(error);
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Something went wrong!",
-                    footer: '<a href="#">Why do I have this issue?</a>'
-                });
+                
             })
             
 
@@ -290,7 +281,7 @@ export default function Login(){
 
        
 
-
+        <ToastContainer/>
         </div>
     )
 }

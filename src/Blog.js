@@ -56,14 +56,14 @@ function Blog(props) {
 
     const dispatch = useDispatch();
 
-    const setData = (t,d,u)=>{
+    const setData = (t,d,a)=>{
       
       store.dispatch({
         type:"checkValue",
         payload: {
           title: t,
           description: d,
-          author: u
+          authorId: a
         },
       })
     }
@@ -108,11 +108,11 @@ function Blog(props) {
              {article.slice().reverse().map((data,i)=>
              
           
-          <Link className='text-blue-600 hover:cursor-pointer' to={{ pathname:"/posts", search: ("?Title="+data.title).replace(/\s\+/g, '-').toLowerCase()}}> 
+          <Link className='hover:cursor-pointer' to={{ pathname:"/posts", search: ("?Title="+data.title).replace(/\s\+/g, '-').toLowerCase()}}> 
           <div key={i} onClick={(e)=>{setData(data.title, data.description, data.author)}}  className="hover:cursor-pointer text-black mt-2  flex flex-row  w-7/3 justify-between items-start p-2 border-solid border-2 border-gray-300 ">
   
           <div  className=" h-12 "> 
-          <h1  className="h-8  truncate  font-semibold text-lg">
+          <h1  className=" h-8  truncate   font-semibold text-lg">
             {data.title}
             {/* data.date */}
           </h1>
