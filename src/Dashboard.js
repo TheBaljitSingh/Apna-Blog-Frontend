@@ -59,9 +59,9 @@ export default function Dashboard(props){
 
 
         // setReloadFlag(!reloadFlag);
-      //   setTimeout(()=>{
-      //     window.location.reload();
-      // },1000)
+        setTimeout(()=>{
+          window.location.reload();
+      },1000)
 
       
 
