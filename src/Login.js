@@ -102,9 +102,9 @@ export default function Login(){
                 // navigate("/");
 
 
-                // setTimeout(()=>{
-                //     window.location.reload();
-                // },2000)
+                setTimeout(()=>{
+                    window.location.reload();
+                },2000)
              
 
 
