@@ -15,6 +15,8 @@ import { ToastContainer,toast } from "react-toastify";
 
 
 export default function Dashboard(props){
+  const [reloadFlag, setReloadFlag] = useState(false);
+
 
   const [date, setDate] = useState();
 
@@ -55,9 +57,11 @@ export default function Dashboard(props){
             position: "bottom-center" 
         });
 
-        setTimeout(()=>{
-          window.location.reload();
-      },1000)
+
+        // setReloadFlag(!reloadFlag);
+      //   setTimeout(()=>{
+      //     window.location.reload();
+      // },1000)
 
       
 
@@ -173,10 +177,10 @@ export default function Dashboard(props){
             position: "bottom-center"
           })
 
-        setTimeout(()=>{
-          window.location.reload();
+        // setTimeout(()=>{
+        //   window.location.reload();
 
-        },1000)
+        // },1000)
         }
       })
       .catch(e=>{
@@ -191,6 +195,8 @@ export default function Dashboard(props){
       fetctInfo();
       handleClick();
       isLoginFun();
+      handleDeletePost();
+      // logoutBtn();
       
     },[])
 

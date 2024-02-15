@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import Nav from "./Nav";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 // import {background} from "../"
 
@@ -20,6 +23,13 @@ export default function Home() {
   // }else{
   //   navigate('/Login');
   // }
+
+  useEffect(()=>{
+    axios.get("https://apna-blog-backend2.onrender.com/")
+    .then(res=>{
+      console.log("server ko call kiya start hone ke liyea");
+    })
+  })
 
   
 

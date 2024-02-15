@@ -7,6 +7,7 @@ import Baljit from "../src/Baljit_maskup.jpg";
 // hello for test
 export default function About(props){
 
+
     return(
         <div>
         <div>

@@ -12,6 +12,12 @@ import Nav from "./Nav";
 
 
 export default function Login(){
+    const [reloadFlag, setReloadFlag] = useState(false);
+
+    console.log("reloaded the component");
+
+
+    console.log("login wala function call hua");
 
  
     
@@ -35,13 +41,7 @@ export default function Login(){
 
 
 
-    useEffect(()=>{
-      handleview();
-    //   isLoginFun();
-        
 
-    },[])
-    
   
 
     const navigate = useNavigate();
@@ -69,7 +69,9 @@ export default function Login(){
     
     
     const loginSubmit =  async (e)=>{
-        e.preventDefault();
+        if (e && e.preventDefault) {
+            e.preventDefault();
+          }
 
 
         setEmail("");
@@ -87,7 +89,6 @@ export default function Login(){
                 document.cookie = `token=${res.data.token}`;  ;
                 console.log("cookie set ho gya");
 
-                // navigate("/Dashboard");
                 // navigate nahi karna hai refresh karna hai dashboard wala component render hone ke liyea
 
 
@@ -96,9 +97,14 @@ export default function Login(){
                 position: "bottom-center"
                });
 
-                setTimeout(()=>{
-                    window.location.reload();
-                },2000)
+
+               setReloadFlag(!reloadFlag);
+                // navigate("/");
+
+
+                // setTimeout(()=>{
+                //     window.location.reload();
+                // },2000)
              
 
 
@@ -128,7 +134,9 @@ export default function Login(){
     }
 
     const signupSubmit = async (e)=>{
-        e.preventDefault()
+        if (e && e.preventDefault) {
+            e.preventDefault();
+          }
 
         if(cpassword!=password){
             toast.error("Password don't matched",{
@@ -168,6 +176,14 @@ export default function Login(){
         
 
         }
+
+        useEffect(()=>{
+
+            loginSubmit();
+            handleview();
+
+
+        },[])
 
         
  

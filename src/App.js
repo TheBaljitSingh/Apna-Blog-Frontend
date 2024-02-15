@@ -93,7 +93,7 @@ export default function App(){
   useEffect(()=>{
     isLoginFun();
     // authorFunction()
-    // setLogin();
+    setLogin();
 
 
   },[])
