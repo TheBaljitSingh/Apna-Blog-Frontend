@@ -5,7 +5,6 @@ import axios from "axios";
 import Compose from "./Compose";
 import Contact from "./Contact";
 import Login from "./Login";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import About from "./About";
@@ -23,6 +22,8 @@ import View from "./View";
 export default function App(){
 
   // toast.configure();
+
+  console.log(process.env.REACT_APP_BACKEND_URL);
 
 
 

@@ -5,7 +5,9 @@ import Nav from "./Nav";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+// import { Test } from "./Test";
 
+import Stopwatch from "./Stopwatch";
 
 // import {background} from "../"
 
@@ -25,13 +27,13 @@ export default function Home() {
   // }
 
   useEffect(()=>{
-    axios.get("https://apna-blog-backend2.onrender.com/")
+    axios.get(process.env.REACT_APP_BACKEND_URL)
     .then(res=>{
       console.log("server ko call kiya start hone ke liyea");
     })
   })
 
-  
+    
 
     return(
       
@@ -39,6 +41,7 @@ export default function Home() {
       // isAuthenticated ?<Dashboard/>:<Login/>
       <div   >
         <Nav/>
+        {/* <Stopwatch/> */}
         <div className="flex flex-row justify-between">
 
           <div className=" ml-52 mt-28 ">

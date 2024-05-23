@@ -13,7 +13,7 @@ export default function Contact(props){
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e)=>{
+  const  handleSubmit = async (e)=>{
     e.preventDefault();
 
     setName("");
