@@ -70,7 +70,7 @@ export default function Login(){
         setPassword("");
 
 
-        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`,{email, password})
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/login`,{email, password})
         .then(res =>{   
             
             if(res.status===200){
@@ -144,7 +144,7 @@ export default function Login(){
             // console.log("signup successfully");
 
             
-            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/register`, {name,email, password,cpassword})
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}auth/register`, {name,email, password,cpassword})
             .then(res=>{
                 console.log(res);
                 if(res.status==201){
