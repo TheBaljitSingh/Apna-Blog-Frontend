@@ -166,7 +166,7 @@ export default function Dashboard(){
                   navigate("/Blog?id=blogId00x")
                 }}  blogId={"blogid00x"} /> 
                  <BlogCard title={"Private Blog"} description={"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque, necessitatibus"}/>
-                 <Link to={"/Create"} >
+                 <Link to={"/Create"} className="block md:hidden" >
                  <BlogCard title={"Compose Blog"}/>
                  </Link>
 
