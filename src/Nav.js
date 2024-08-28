@@ -253,7 +253,7 @@ export default function Nav() {
               </div>
             ) : (
               <Link
-                to="/login"
+                to="/auth?mode=login"
                 className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
               >
                 Log in
