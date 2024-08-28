@@ -1,37 +1,34 @@
-import React from 'react'
-// import {  useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
 import Nav from './Nav';
+import axios from 'axios';
 
 
 
-function View(props) {
+function View(blogId) {
 
-    const {title, description, author} = props;
-    console.log(title);
-    console.log(description);
-    console.log(author);
+  const [blog, SetBlog] = useState();
+
+
+    useEffect(()=>{
+      axios.get(`${REACT_APP_BACKEND_URL}blogs/:${blogId}`)
+      .then(res=>{
+        SetBlog(res);
+
+      })
+
+    },[])
 
 
   //  const navigate = useNavigate();  
 
-   if(!title && !description && !author){
-    return (
-        <div>
-            <Nav/>
-      
-        <div className='flex justify-center items-center w-screen h-screen '>
-            <p className='text-center'>Sorry, sabar karo dheere dheere ye bhi ho jayega ki tum link se access kar pao 🙃</p>
-            
-        </div>
-        </div>
-    )
-   }
+   
 
    return (
       
         <div>
         <Nav/>
-
+        {/* {blog.map(function(b))} */}
+        blog.map(b)
           <div className='ml-52 mt-10 w-3/4'>
             <h1 className='p-2  text-2xl font-semibold text-center  border-black'>{props.title}</h1>
 
@@ -46,12 +43,8 @@ function View(props) {
           </div>
 
 
-          {/* <footer className='w-screen bg-teal-400 h-12 fixed bottom-0 left-0 flex justify-center items-center '>
-          <p className='flex justify-center '>Baljit Singh</p>
-        </footer> */}
         </div>
    )
-
 
 
     

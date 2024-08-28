@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { FaLinkedin } from "react-icons/fa";
 import Nav from "./Nav";
 import Baljit from "../src/Baljit_maskup.jpg";
