@@ -22,7 +22,7 @@ const SearchResults = () => {
     useEffect(() => {
         if (query) {
             setLoading(true);
-            axios.get(`/api/search?q=${query}`)
+            axios.get(`${process.env.REACT_APP_BACKEND_URL}api/search?q=${query}`)
                 .then(response => {
                     const transformedBlogs = response.data.map((blog) => {
                         let imageUrl = '';
