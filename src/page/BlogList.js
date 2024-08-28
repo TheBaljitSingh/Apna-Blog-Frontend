@@ -25,7 +25,7 @@ const BlogList = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('/api/blogs', {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/blogs`, {
         params: {
           page,
           limit: blogsPerPage,
@@ -58,6 +58,7 @@ const BlogList = () => {
       });
 
       setBlogs(transformedBlogs);
+      console.log(transformedBlogs);
       setTotalPages(response.data.totalPages);
       setCurrentPage(response.data.currentPage);
     } catch (error) {
