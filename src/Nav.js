@@ -159,7 +159,7 @@ export default function Nav() {
             <Link to="/contact" className="font-semibold hover:text-gray-300">CONTACT</Link>
           </div>
           <div className="flex items-center lg:order-2">
-            <Link to="/Create">
+            { userInfo &&   <Link to="/Create">
               <button
                 type="button"
                 className="hidden gap-2 sm:inline-flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-md px-3 py-1.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
@@ -167,7 +167,7 @@ export default function Nav() {
                 <IoCreate size={24} />
                 Create
               </button>
-            </Link>
+            </Link>}
             <button
               onClick={toggleMobileSearch}
               type="button"
