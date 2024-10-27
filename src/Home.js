@@ -38,16 +38,39 @@ export default function Home() {
         </p>
       </div>
 
+
       <div className="col-span-12 md:col-span-3 flex items-center justify-center">
         <img
-          className="w-full max-w-xs md:max-w-md rounded-lg shadow-lg"
+          className="w-full max-w-[90%] sm:max-w-[75%] md:max-w-[100%] lg:max-w-md rounded-lg shadow-lg"
           src="https://thesavvycouple.com/wp-content/uploads/2018/09/Best-Stock-Photo-Sites.jpg"
           alt="Blogging"
         />
       </div>
-    </div>
-    
 
+      {/* Signup and login buttons */}
+      </div>
+        <div className="flex flex-col items-center justify-center text-center gap-4">
+      <p className="text-gray-700">
+        Don't have an account?
+        <button 
+          className="ml-2 bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-200"
+          onClick={() => navigate('auth?mode=login')}
+        >
+          Sign Up
+        </button>
+      </p>
+      
+      <p className="text-gray-700">
+        Already have an account?
+        <button 
+          className="ml-2 bg-gray-800 text-white font-bold py-2 px-4 rounded hover:bg-gray-900 transition duration-200"
+          onClick={() => navigate('/auth?mode=login')}
+        >
+          Login
+        </button>
+      </p>
+      </div>
+      
       </div>
     )      
       
