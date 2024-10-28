@@ -74,15 +74,17 @@ export default function Login() {
     
                 <div className="ml-0 md:ml-4 mt-6 md:mt-4">
                   <h4 className="mt-1 text-center md:text-left">Follow these easy <span className="underline self-baseline cursor-s-resize">steps</span>:</h4>
-                  <div className="mt-4 text-lg">
-                    <ul className="list-none text-center md:text-left">
-                      <li className="mt-2">Login/Signup with your account</li>
-                      <li className="mt-2">Go to Profile section</li>
-                      <li className="mt-2">Then Compose Section</li>
-                      <li className="mt-2">Write and click on Publish!</li>
-                      <li className="mt-2">All Done 🎉</li>
-                    </ul>
-                  </div>
+                   <div className="mt-4 flex justify-center md:justify-start">
+                    <div className="inline-block text-left">
+                    <ul className="list-disc pl-5 sm:pl-6 space-y-2 text-base sm:text-lg">
+                    <li className="marker:text-gray-600">Login/Signup with your account</li>
+                    <li className="marker:text-gray-600">Go to Profile section</li>
+                    <li className="marker:text-gray-600">Then Compose Section</li>
+                    <li className="marker:text-gray-600">Write and click on Publish!</li>
+                    <li className="marker:text-gray-600">All Done 🎉</li>
+                  </ul>
+                </div>
+              </div>
                 </div>
               </div>
             </div>
@@ -224,7 +226,10 @@ export default function Login() {
                         />
                       </div>
                       <div className="flex justify-center items-center">
-                        <button type="submit" className="md:w-1/2 text-white bg-gray-700 hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        <button 
+                          type="submit" 
+                          className="w-full text-white bg-gray-700 hover:bg-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                        >
                           Create an account
                         </button>
                       </div>
