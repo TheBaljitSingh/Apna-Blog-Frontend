@@ -145,6 +145,13 @@ export default function Login() {
                       </div>
                     </form>
     
+                    {/* Or separator */}
+                    <div className="flex justify-center items-center mt-2 mb-2">
+                      <hr className="w-full border-t border-gray-300" />
+                      <span className="mx-2 text-gray-500">Or</span>
+                      <hr className="w-full border-t border-gray-300" />
+                    </div>
+
                     {/* Google login */}
                     <div className="flex flex-col justify-center items-center">
                       <button className="gsi-material-button" styles="width:100">
