@@ -170,14 +170,7 @@ export default function Login(){
                                 <input required id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}  name="password" placeholder="password" class="bg-gray-50 border outline-none border-gray-300 text-gray-900 sm:text-sm rounded-lg  focus:border-primary-600 block w-full p-2.5 " />
                             </div>
                             <div class="flex items-center justify-between">
-                                <div class="flex items-start">
-                                    <div class="flex items-center h-5">
-                                        <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3  " required=""/>
-                                    </div>
-                                    <div class="ml-3 text-sm">
-                                        <label for="remember" class="text-gray-500 ">Remember me</label>
-                                    </div>
-                                </div>
+                              
                                 <a href="#" class="text-sm font-medium text-primary-600 hover:underline ">Forgot password?</a>
                             </div>
                             <div className="flex justify-center items-center">
